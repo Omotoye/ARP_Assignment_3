@@ -1,0 +1,7 @@
+# for the compiled c files
+*.o
+*.out
+
+# for vscode stuff 
+*.json
+*.vscode
