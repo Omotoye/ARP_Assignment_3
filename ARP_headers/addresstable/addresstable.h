@@ -87,6 +87,7 @@ node_id iptab_get_next( node_id my );
 
 
 
+// ----------------------------- DEPRECATED -----------------------------
 // get the ID of the previous node in the table (in order)
 /****************************************************************************
 * Return the ID of the previous available node(growing order) in the IP_table.
@@ -97,7 +98,9 @@ node_id iptab_get_next( node_id my );
 * Return
 *	n - The ID of the previous node;
 ****************************************************************************/
-node_id iptab_get_prev( node_id my );
+//node_id iptab_get_prev( node_id my );
+// ----------------------------- DEPRECATED -----------------------------
+
 
 // ------------------------
 //  OPS ON "AVAILABLE" FLAG

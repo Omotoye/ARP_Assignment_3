@@ -18,13 +18,13 @@ void msg_init( message_t* msg )
 // set receiving time time
 void msg_set_recv( message_t* msg )
 {
-    gettimeofday( &msg->recvd, NULL );
+    gettimeofday( &(msg->recvd), NULL );
 }
 
 // set the sending time
 void msg_set_sent( message_t* msg )
 {
-    gettimeofday( &msg->sent, NULL );
+    gettimeofday( &(msg->sent), NULL );
 }
 
 // set id and turn leader
@@ -103,4 +103,20 @@ node_id msg_rand( message_t* msg )
         n = rdmindex(0, max);
 
     return idx[n];
+}
+// get the turnLeader field
+node_id msg_get_turnLeader( message_t* msg ){
+	return msg->turnLeader;
+}
+
+// get receiving time time
+struct timeval msg_get_recv( message_t* msg )
+{
+    return msg->recvd;
+}
+
+// get the sending time
+struct timeval msg_get_sent( message_t* msg )
+{
+    return msg->sent;
 }

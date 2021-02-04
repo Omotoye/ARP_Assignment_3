@@ -29,6 +29,27 @@ void vote_do_votation( votation_t* msg )
 // which is the lucky node?
 node_id vote_getWinner( votation_t* msg )
 {
-    return msg->voted_node;
+	/*
+		// OLD VERSION
+		return msg->voted_node
+	*/
+    // get the "nominal" winner
+	node_id winner = msg->voted_node;
+	node_id check = winner;
+	
+	// then take the next until the winner is an available node
+	// if possible
+	while( ! iptab_is_available( winner ) )
+	{
+		winner = ( winner + 1 ) % iptab_len();
+		if( winner == check )
+		{
+			winner = -1;
+			break;
+		}
+	}
+
+	// then return it, or return -1
+	return winner;
 }
 

@@ -52,6 +52,7 @@ void vote_do_votation( votation_t* msg );
 *
 * Return
 *       the node_id of the winner node (the next turn leader)
+        or -1 if no other id is available in the network (just to be safe)
 **************************************************/
 node_id vote_getWinner( votation_t* msg );
 

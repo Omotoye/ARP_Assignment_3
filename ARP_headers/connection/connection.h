@@ -11,15 +11,22 @@
 #include <string.h>
 
 /**********************************************//**
+* Well-known port for the Network: 5080
+* Each node must use this port in order to
+* communicate within the network. Please make sure
+* you have this port enabled on your Azure VM.
+**************************************************/
+#define     ARPNET_STD_PORTNO     5080
+
+/**********************************************//**
 * Initializing the main socket in a server code.
 *
 * Inside this function the socket gets generated,
 * a bind() is tried and, if succesful, is followed
 * by a listen().
 *
-* Arguments
-*	portno - Port number the calling process will
-*		attach the socket to;
+* You can see the portno using the constant
+*       ARPNET_STD_PORT
 *
 * Return
 *	sockfd - the file descriptor of the opened
@@ -27,7 +34,7 @@
 *		the error code associated with the first
 *		error occurred in the process;
 **************************************************/
-int server_init(int portno);
+int net_server_init( );
 
 
 /**********************************************//**
@@ -41,7 +48,8 @@ int server_init(int portno);
 *		process is waiting of for a connection 
 *		request;
 *	p_cli_addr - a pointer to a struct where data
-*		of the client will be inserted;
+*		of the client will be inserted; NULL if 
+*       not used
 *
 * Return
 *	newsockfd - the file descriptor of the newly
@@ -50,7 +58,7 @@ int server_init(int portno);
 *		otherwise the error code associated with
 *		the accept() failed call;
 **************************************************/
-int accept_client(int sockfd, struct sockaddr_in* cli_addr);
+int net_accept_client(int sockfd, struct sockaddr_in* cli_addr);
 
 
 /**********************************************//**
@@ -61,17 +69,18 @@ int accept_client(int sockfd, struct sockaddr_in* cli_addr);
 * connection with the server indicated is 
 * attempted.
 *
+* You can see the portno using the constant
+*       ARPNET_STD_PORT
+*
 * Arguments
 *	IPaddr - a string representing the name 
 *		associated with the server;
-*	portno - the port number the server is 
-*		supposed to be listening to;
 *
 * Return
 *	sockfd - the file descriptor of the opened
 *		socket where the communication with the
 *		desired server can take place;		
 **************************************************/
-int client_connection(char *IPaddr, int portno);
+int net_client_connection(char *IPaddr);
 
 #endif

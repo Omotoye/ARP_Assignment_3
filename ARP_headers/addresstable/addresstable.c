@@ -60,6 +60,7 @@ node_id iptab_get_next( node_id my )
     return n;
 }
 
+/* DEPRECATED
 // get the ID of the previous node in the table (in order)
 node_id iptab_get_prev( node_id my )
 {
@@ -73,6 +74,7 @@ node_id iptab_get_prev( node_id my )
 
     return n;
 }
+*/
 
 // ------------------------
 //  OPS ON "AVAILABLE" FLAG

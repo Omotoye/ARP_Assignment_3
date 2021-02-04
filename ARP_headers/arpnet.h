@@ -8,6 +8,7 @@
 #include "handshake/handshake.h"
 #include "initstep/initstep.h"
 #include "message/message.h"
+#include "statistics/statistics.h"
 
 #define OUTERLOOPS 10
 #define INNERLOOPS 10

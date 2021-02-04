@@ -45,9 +45,6 @@ int hsh_imfirtst( char* my_ip );
 void hsh_init( handshake_t* hsm );
 
 
-
-
-
 //--------------------------------------
 //  HANDSHAKE FIRST STEP
 //--------------------------------------

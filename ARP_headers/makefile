@@ -1,5 +1,5 @@
 
-SUBDIRS = addresstable misc bitvector connection handshake initstep message 
+SUBDIRS = addresstable misc bitvector connection handshake initstep message statistics
 # VPATH := $(patsubst %, %:, $(SUBDIRS))
 DEP_OBJ := $(foreach dir, $(SUBDIRS), $(wildcard $(dir)/*.o))
 
