@@ -5,6 +5,9 @@
 #include <limits.h>
 #include <stdint.h>
 
+//typedef uint64_t BITVECT_64BIT; //64bit, not depending on the machine, unsigned
+typedef uint64_t BITVECT_64BIT;
+
 /**********************************************//**
 * Initializing a bitvector to 1 in every position.
 *
@@ -13,9 +16,10 @@
 *   len - Dimension of the bitvector;
 *
 **************************************************/
-#define RIGHT_BITMASK(var, len) { var = 0; for(int j=0; j<(len); j++) var += (1 << j); }
+#define RIGHT_BITMASK(var, len) { var = 0; for(BITVECT_64BIT j=0; j<(len); j++) var |= (1u << j); }
 
 /**********************************************//**
+* (DEPRECATED unpredictable behaviour in some occasions)
 * Shifting to left the bit 1 of a given number of
 * position
 *
@@ -26,9 +30,7 @@
 *   The function returns the bit 1 shifted to left of
 *   pos positions;
 **************************************************/
-#define BIT(pos) 1 << pos
-
-typedef uint64_t BITVECT_64BIT; //64bit, not depending on the machine, unsigned
+//define BIT(pos) (1u << pos)
 
 // bit vector type ( just 'int' if IP_TABLE_LEN <= 32 )
 typedef struct
@@ -96,7 +98,7 @@ void bv_clear( bitvector_t* bv );
 *   and returns 1 if the node isn't visited yet.
 *
 **************************************************/
-int bv_marked( bitvector_t* bv, int pos );
+int bv_marked( bitvector_t* bv, BITVECT_64BIT pos );
 
 /**********************************************//**
 * Marks a node as visited.
@@ -111,7 +113,7 @@ int bv_marked( bitvector_t* bv, int pos );
 *   pos - Node number
 *
 **************************************************/
-void bv_mark( bitvector_t* bv, int pos );
+void bv_mark( bitvector_t* bv, BITVECT_64BIT pos );
 
 /**********************************************//**
 * Checking if all bit on the bitvector are marked

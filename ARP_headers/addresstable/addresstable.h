@@ -51,8 +51,8 @@ int iptab_len();
 *	n - Id number of a node;
 *
 * Return
-*	__ip_table[n].ip_addr - The IP address of the specified node as string, or NULL
-                            if the version is not the last released ;
+*	An IP address as string only if the given node is available
+*   otherwise, NULL is returned.
 ****************************************************************************/
 char* iptab_getaddr(node_id n);
 

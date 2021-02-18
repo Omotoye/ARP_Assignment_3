@@ -54,8 +54,14 @@ int iptab_get_ID_of(char* ip)
 node_id iptab_get_next( node_id my )
 {
     node_id n = my;
+	/* If there is no available node we would loop forever */
+	if (__ip_table_available_nodes < 1)	return -1;
+	
     do  n = (n+1) % __IP_TABLE_LEN;
     while ( __ip_table[n].ip_avail == __NOD_NOT_AVAILABLE );
+	/* If the calling node is the only available one in the network 
+		no communication can be established */
+	if (n == my)	return -1;
 
     return n;
 }
@@ -102,8 +108,11 @@ int iptab_set_unavailable(node_id n)
     if( n < 0 || n >= __IP_TABLE_LEN )
         return -1;
 
-    __ip_table[n].ip_avail = __NOD_NOT_AVAILABLE;
-    __ip_table_available_nodes--;
+    if( __ip_table[n].ip_avail != __NOD_NOT_AVAILABLE )
+    {
+        __ip_table[n].ip_avail = __NOD_NOT_AVAILABLE;
+        __ip_table_available_nodes--;
+    }
 
     return 0;
 }
@@ -115,8 +124,11 @@ int iptab_set_available(node_id n)
     if( n < 0 || n >= __IP_TABLE_LEN )
         return -1;
 
-    __ip_table[n].ip_avail = __NOD_AVAILABLE;
-    __ip_table_available_nodes++;
+    if( __ip_table[n].ip_avail != __NOD_AVAILABLE )
+    {
+        __ip_table[n].ip_avail = __NOD_AVAILABLE;
+        __ip_table_available_nodes++;
+    }
 
     return 0;
 }

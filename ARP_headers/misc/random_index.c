@@ -11,7 +11,7 @@ int rdmindex(int min , int max)
 	// this piece discards values of 'r' which would cause non-uniformity in
 	// the subsequent 'modulo' operation (since RAND_MAX is generally not abort
 	// multiple of our required range.
-	while( (r = rand()) > RAND_MAX - (RAND_MAX - (range-1) )%range ){}
+	while( (r = rand()) > (RAND_MAX - (RAND_MAX - (range-1) )%range) ){}
       
 	return min + r%range;
 }

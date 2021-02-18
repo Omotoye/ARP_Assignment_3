@@ -30,7 +30,7 @@ handshake_t;
 * Return
 *       1 if the node is the starting one; otherwise, 0
 **************************************************/
-int hsh_imfirtst( char* my_ip );
+int hsh_imfirst( char* my_ip );
 
 
 

@@ -143,10 +143,10 @@ int msg_all_visited( message_t* msg );
 *	msg - The message within to choose the next node 
 *
 * Return
-*	idx[n] - ID of the randomly chosen node
+*	idx[n] - ID of the randomly chosen node (or an error code)
 *	
 ****************************************************************************/
-node_id msg_rand( message_t* msg );
+int msg_rand( message_t* msg );
 
 
 /************************************************************************//**

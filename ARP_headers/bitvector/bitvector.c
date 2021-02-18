@@ -21,38 +21,21 @@ void bv_clear( bitvector_t* bv )
 }
 
 // check if a node is marked as visited
-int bv_marked( bitvector_t* bv, int pos )
+// unmarked(1) - marked(0)
+int bv_marked( bitvector_t* bv, BITVECT_64BIT pos )
 {
-    if( pos < 0 ) return -1;
-    if( pos >= bv->len ) return -1;
-
-    // example
-    // pos 4
-    // 1000 <- bit
-    // 1111 <- bit vector
-    // 1000
-    unsigned int bit = BIT( pos );
-    if( ( bit & bv->v ) == 0 )
-        return 1;
-    else
-        return 0;
+    return ( !( (1u<<pos) & bv->v ) || pos<0 || pos>=bv->len );
 }
 
 // mark a node as visited
-void bv_mark( bitvector_t* bv, int pos )
+void bv_mark( bitvector_t* bv, BITVECT_64BIT pos )
 {
-    unsigned int bit = ~BIT( pos );
-    bv->v &= bit;
+    bv->v &= ~(1u<<pos);
 }
 
 // check if at least one node is available
 int bv_all_marked( bitvector_t* bv )
 {
-    unsigned int bmask = 0;
-    RIGHT_BITMASK( bmask, bv->len );
-
-    if( ( bmask & bv->v ) == 0 )
-        return 1;
-    else
-        return 0;
+    unsigned int bmask = 0; RIGHT_BITMASK( bmask, bv->len );
+    return !( bmask & bv->v );
 }

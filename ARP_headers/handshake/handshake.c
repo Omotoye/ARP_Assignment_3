@@ -8,7 +8,7 @@
 
 // check if a node is the starting point for the handshake
 // 1 if the node is the starting one; otherwise, 0
-int hsh_imfirtst( char* my_ip )
+int hsh_imfirst( char* my_ip )
 {
     if( my_ip == NULL )
         return 0;
@@ -52,10 +52,5 @@ int hsh_check_availability( node_id my_id, handshake_t* hsm )
 void hsh_update_iptab( handshake_t* hsm )
 {
     for( int i=0; i<iptab_len(); i++ )
-    {
-        if( bv_marked( &hsm->available_nodes, i ) )
-            iptab_set_available( i );
-        else 
-            iptab_set_unavailable( i );
-    }
+        if( !bv_marked( &hsm->available_nodes, i ) ) iptab_set_unavailable( i );
 }
