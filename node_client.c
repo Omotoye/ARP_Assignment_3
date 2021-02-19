@@ -11,6 +11,8 @@
 #include <signal.h>
 #include <sys/time.h>
 
+#include "arpnet.h"
+
 char command;
 
 // function for error management

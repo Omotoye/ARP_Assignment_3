@@ -8,6 +8,8 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 
+#include "arpnet.h"
+
 void error(char *msg)
 {
     perror(msg);
