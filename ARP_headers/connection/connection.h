@@ -11,6 +11,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <sys/select.h>
+#include <arpa/inet.h>
 
 /**********************************************//**
 * Well-known port for the Network: 5080

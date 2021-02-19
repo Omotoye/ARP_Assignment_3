@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
-char* RURZ_IP_STR = "0.0.0.0";
+char* RURZ_IP_STR = "255.0.0.0";
 // int RURZ_PORTNO = -1;
 
 // initialize stat message
