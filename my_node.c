@@ -9,6 +9,12 @@ int main(int argc, char *argv[])
     // Get my index from the table
     MY_INDEX = iptab_get_ID_of(MY_IP_ADDR);
 
+    // Creating a file for logging Output Data
+    FILE *filePointer;
+    filePointer = fopen("log.txt", "w");
+    fprintf(filePointer, "\nBelow is the date analyzes for the whole process\n");
+    fprintf(filePointer, "====================================================\n\n");
+
     /********** HANDSHAKE **********/
 
     handshake_t hs_mes;
@@ -131,12 +137,13 @@ int main(int argc, char *argv[])
             if ((newsockfd = net_accept_client(sockfd, NULL)) < 0)
                 perror("Error in Accepting Connection");
 
-            // Reading the votation message
+            // Reading the common message
             if (read(newsockfd, &common_mes, sizeof(message_t)) == -1)
-                error("ERROR in reading votation message");
+                error("ERROR in reading common message");
 
             // Getting the turn leader node id
             turn_leader = common_mes.turnLeader;
+            fprintf(filePointer, "The turn leader for the cycle is: %u\nTurn leader IP Address: %c\n", turn_leader, iptab_getaddr(turn_leader));
 
             // Checking to see if this node is the turn leader
             if (turn_leader == MY_INDEX)
@@ -225,9 +232,11 @@ int main(int argc, char *argv[])
                 long int avg_fly_time = fly_time / 10;
                 float fly_bandwidth = bit / avg_fly_time;
 
-                // Updating the stat in the stat message
+                // Updating the stat in the stat message and log file
                 stat_message_set_totBitrate(&stat_mes, tot_bandwidth);
                 stat_message_set_flyBitrate(&stat_mes, fly_bandwidth);
+                fprintf(filePointer,"Total Bandwidth: %f\n",tot_bandwidth);
+                fprintf(filePointer,"fly Bandwidth: %f\n",fly_bandwidth);
 
                 // Sending the stat to RURZ server
                 RURZ_addr = stat_get_RURZ_addr();
